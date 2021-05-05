@@ -11,11 +11,11 @@ class RecoveredChart extends Component {
     this.state = {
       series: [
         {
-          name: "New",
+          name: "Atendidos",
           data: [75, 150, 225, 200, 35, 50, 150],
         },
         {
-          name: "Recovered",
+          name: "Sin Atender",
           data: [-100, -55, -40, -120, -70, -40, -60],
         },
       ],

@@ -218,7 +218,6 @@ const Markup = () => {
         </div>
         {!pagePath && <Footer />}
       </div>
-      <Setting />
     </Router>
   );
 };
