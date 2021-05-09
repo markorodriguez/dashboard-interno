@@ -19,7 +19,7 @@ const Doctors = () => {
       año: año,
     };
 
-    Axios.post("http://localhost:2000/citashoy", fecha)
+    Axios.post("https://backend-clinica2331.herokuapp.com/citashoy", fecha)
       .then((res) => {
         console.log(res);
         setLista(res.data);
