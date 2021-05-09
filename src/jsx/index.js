@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 /// React router dom
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import  useToken from './hooks/useToken'
 /// Css
 import "./index.css";
 import "./chart.css";
@@ -104,12 +104,15 @@ const Markup = () => {
   path = path.split("/");
   path = path[path.length - 1];
   let pagePath = path.split("-").includes("page");
+
+
+
   const routes = [
     /// Deshborad
     { url: "", component: Home },
-    { url: "doctors", component: Doctors },
+    { url: "citas", component: Doctors },
     // { url: "workout-plan", component: WorkoutPlan},
-    { url: "doctors-details", component: DoctorsDetails },
+    { url: "resultados", component: DoctorsDetails },
     { url: "doctors-review", component: DoctorsReview },
     { url: "patient-details", component: PatientDetails },
     // { url: "distance-map", component: DistanceMap},
@@ -194,31 +197,36 @@ const Markup = () => {
     { url: "page-error-503", component: Error503 },
   ];
 
+  const {token, setToken} = useToken()
+  if(!window.sessionStorage.getItem('token')){
+    console.log(token)
+    return <Login setToken={setToken} />
+  }
+   
+
   return (
     // <Router basename="/demo/fito/">
-    <Router basename="./">
+    //<Router basename="/">
       <div
         id={`${!pagePath ? "main-wrapper" : ""}`}
         className={`${!pagePath ? "show" : "mh100vh"}`}
       >
         {!pagePath && <Nav />}
+
+
+
         <div className={` ${!pagePath ? "content-body" : ""}`}>
           <div className={`${!pagePath ? "container-fluid" : ""}`}  style={{ "minHeight": "720px", "margin-bottom":"80px" }}>
             <Switch>
-              {routes.map((data, i) => (
-                <Route
-                  key={i}
-                  exact
-                  path={`/${data.url}`}
-                  component={data.component}
-                />
-              ))}
+              <Route exact path="/" component={Home}/>
+              <Route exact path = "/citas" component={Doctors}/> 
+              <Route exact path ="/resultados" component={DoctorsDetails} />
             </Switch>
           </div>
         </div>
-        {!pagePath && <Footer />}
+
       </div>
-    </Router>
+    //</Router>
   );
 };
 

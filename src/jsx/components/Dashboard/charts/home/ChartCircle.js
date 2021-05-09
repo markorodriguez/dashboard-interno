@@ -9,7 +9,9 @@ class ChartCircle extends Component {
     super(props);
 
     this.state = {
-      series: [64, 73, 48],
+      //Math.floor((datos.length/data.length)*100)
+
+      series: [Math.round((this.props.newPositivos/this.props.newTotal)*100), Math.round((this.props.newNegativos/this.props.newTotal)*100)],
       options: {
         chart: {
           type: "radialBar",
@@ -17,24 +19,32 @@ class ChartCircle extends Component {
           height: 350,
           offsetY: 0,
           offsetX: 0,
+          startAngle: 0,
+          endAngle: 360
         },
         plotOptions: {
           radialBar: {
-            size: undefined,
+            size: this.props.newTotal,
             inverseOrder: false,
             hollow: {
               margin: 0,
               size: "35%",
               background: "transparent",
             },
-
+            value: {
+              formatter: function (val){
+                return val + ' casos'
+              }
+            },
             track: {
               show: true,
               background: "#e1e5ff",
               strokeWidth: "10%",
               opacity: 1,
               margin: 15, // margin is in pixels
+             
             },
+            
           },
         },
         responsive: [
@@ -58,9 +68,11 @@ class ChartCircle extends Component {
           opacity: 1,
         },
 
+        
+
         colors: ["#ff2c53", "#209f84", "#ff5c00"],
         series: [71, 63, 90],
-        labels: ["New", "Recover", "In Treatment"],
+        labels: ["Positivos", "Negativos", "In Treatment"],
         legend: {
           fontSize: "16px",
           show: false,

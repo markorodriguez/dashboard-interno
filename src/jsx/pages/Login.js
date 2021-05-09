@@ -1,16 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import  Axios  from "axios";
 
-const Login = ({ history }) => {
-   const [loginData, setLoginData] = useState({});
-   const handleBlur = (e) => {
-      const newLoginData = { ...loginData };
-      newLoginData[e.target.name] = e.target.value;
-      setLoginData(newLoginData);
-   };
+export default function Login ({setToken})  {
+
+   const [usuario, setUsuario] = useState("")
+   const [contraseña, setContraseña] = useState("")
+
+
    const submitHandler = (e) => {
       e.preventDefault();
-      history.push("/");
+      const data = {
+         usr: usuario,
+         pwd: contraseña
+      }
+
+      Axios.post("https://backend-clinica2331.herokuapp.com/login", data).then((res)=>setToken(res.data)).catch((err)=>console.log(err)) 
+
+      
+      //history.push("/");
+      
    };
 
    return (
@@ -23,22 +32,20 @@ const Login = ({ history }) => {
                         <div className="col-xl-12">
                            <div className="auth-form">
                               <h4 className="text-center mb-4">
-                                 Sign in your account
+                                 Bienvenido a la clínica San Andrés
                               </h4>
-                              <form
-                                 action=""
-                                 onSubmit={(e) => submitHandler(e)}
-                              >
+                              
                                  <div className="form-group">
                                     <label className="mb-1">
-                                       <strong>Email</strong>
+                                       <strong>Usuario</strong>
                                     </label>
                                     <input
                                        type="email"
                                        className="form-control"
-                                       defaultValue="hello@example.com"
+                                       placeholder="Usuario"
                                        name="Email"
-                                       onChange={handleBlur}
+                                       value={usuario}
+                                       onChange={(e)=>{setUsuario(e.target.value)}}
                                     />
                                  </div>
                                  <div className="form-group">
@@ -48,52 +55,21 @@ const Login = ({ history }) => {
                                     <input
                                        type="password"
                                        className="form-control"
-                                       defaultValue="Password"
+                                       placeholder="Contraseña"
                                        name="password"
-                                       onChange={handleBlur}
+                                       value={contraseña}
+                                       onChange={(e)=>{setContraseña(e.target.value)}}
                                     />
                                  </div>
-                                 <div className="form-row d-flex justify-content-between mt-4 mb-2">
-                                    <div className="form-group">
-                                       <div className="custom-control custom-checkbox ml-1">
-                                          <input
-                                             type="checkbox"
-                                             className="custom-control-input"
-                                             id="basic_checkbox_1"
-                                          />
-                                          <label
-                                             className="custom-control-label"
-                                             htmlFor="basic_checkbox_1"
-                                          >
-                                             Remember my preference
-                                          </label>
-                                       </div>
-                                    </div>
-                                    <div className="form-group">
-                                       <Link to="/page-forgot-password">
-                                          Forgot Password?
-                                       </Link>
-                                    </div>
-                                 </div>
+
                                  <div className="text-center">
-                                    <input
+                                    <button onClick={submitHandler}
                                        type="submit"
-                                       value="Sign Me In"
                                        className="btn btn-primary btn-block"
-                                    />
+                                    > Iniciar Sesión</button>
                                  </div>
-                              </form>
-                              <div className="new-account mt-3">
-                                 <p>
-                                    Don't have an account?{" "}
-                                    <Link
-                                       className="text-primary"
-                                       to="/page-register"
-                                    >
-                                       Sign up
-                                    </Link>
-                                 </p>
-                              </div>
+                              
+
                            </div>
                         </div>
                      </div>
@@ -105,4 +81,6 @@ const Login = ({ history }) => {
    );
 };
 
-export default Login;
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
+};

@@ -628,3 +628,10 @@ rect#chart_ChartBorder {
   background: #aab6fe;
   cursor: pointer;
 }
+
+.di-td:hover{
+  background-color: #f72b50;
+  color: white;
+  font-weight: 400;
+  transition: 0.2s ease-in-out;
+}

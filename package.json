@@ -1,7 +1,7 @@
 {
   "name": "mediqu",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
@@ -24,6 +24,7 @@
     "@testing-library/user-event": "^12.2.2",
     "@y0c/react-datepicker": "^1.0.4",
     "apexcharts": "^3.22.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "chart.js": "^2.9.4",
     "chartist": "^0.11.4",

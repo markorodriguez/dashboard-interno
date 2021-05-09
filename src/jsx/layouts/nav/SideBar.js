@@ -175,7 +175,7 @@ class SideBar extends Component {
                 <li>
                   <Link
                     className={`${path === "doctors" ? "mm-active" : ""}`}
-                    to="/doctors"
+                    to="/citas"
                   >
                     Citas
                   </Link>
@@ -184,7 +184,7 @@ class SideBar extends Component {
                   <Link
                     className={`${path === "doctors-details" ? "mm-active" : ""
                       }`}
-                    to="/doctors-details"
+                    to="/resultados"
                   >
                     Pacientes
                   </Link>
@@ -193,39 +193,10 @@ class SideBar extends Component {
                 <li></li>
               </ul>
             </li>
-            <li className={`${app.includes(path) ? "mm-active" : ""}`}>
-              <Link className="has-arrow ai-icon" to="#" aria-expanded="false">
-                <i className="flaticon-381-television"></i>
-                <span className="nav-text">Apps</span>
-              </Link>
-              <ul aria-expanded="false">
-                <li>
-                </li>
-                      <Link
-                        className={`${path === "email-compose" ? "mm-active" : ""
-                          }`}
-                        to="/email-compose"
-                      >
-                        Email
-                      </Link>
-                <li>
 
-                </li>
-                <li className={`${shop.includes(path) ? "mm-active" : ""}`}>
-
-                  <ul
-                    aria-expanded="false"
-                    className={`${shop.includes(path) ? "mm-show" : ""}`}
-                  >
-                  </ul>
-                </li>
-              </ul>
-            </li>
 
           </MM>
 
-
-          
         </PerfectScrollbar>
       </div>
     );
