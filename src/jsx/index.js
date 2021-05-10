@@ -137,9 +137,9 @@ const Markup = () => {
     { url: "ui-typography", component: UiTypography },
     { url: "ui-grid", component: UiGrid },
     /// Apps
-    { url: "app-profile", component: AppProfile },
-    { url: "post-details", component: PostDetails },
-    { url: "email-compose", component: Compose },
+    { url: "citas-mes", component: AppProfile },
+    { url: "ganancias-mes", component: PostDetails },
+    { url: "resultados-generales", component: Compose },
     { url: "email-inbox", component: Inbox },
     { url: "email-read", component: Read },
     { url: "app-calender", component: Calendar },
@@ -198,7 +198,7 @@ const Markup = () => {
   ];
 
   const {token, setToken} = useToken()
-  if(!window.sessionStorage.getItem('token')){
+  if(!window.localStorage.getItem('token')){
     console.log(token)
     return <Login setToken={setToken} />
   }
@@ -212,15 +212,15 @@ const Markup = () => {
         className={`${!pagePath ? "show" : "mh100vh"}`}
       >
         {!pagePath && <Nav />}
-
-
-
         <div className={` ${!pagePath ? "content-body" : ""}`}>
           <div className={`${!pagePath ? "container-fluid" : ""}`}  style={{ "minHeight": "720px", "margin-bottom":"80px" }}>
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route exact path = "/citas" component={Doctors}/> 
               <Route exact path ="/resultados" component={DoctorsDetails} />
+              <Route exact path = "/citas-mes" component={DoctorsReview}/> 
+              <Route exact path = "/ganancias-mes" component={AppProfile}/> 
+              <Route exact path ="/resultados-generales" component={PatientDetails} />
             </Switch>
           </div>
         </div>

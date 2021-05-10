@@ -189,10 +189,43 @@ class SideBar extends Component {
                     Pacientes
                   </Link>
                 </li>
-                <li></li>
-                <li></li>
+
               </ul>
             </li>
+
+            <li className={`${app.includes(path) ? "mm-active" : ""}`}>
+              <Link className="has-arrow ai-icon" to="#" aria-expanded="false">
+                <i className="flaticon-381-networking"></i>
+                <span className="nav-text">Reportes</span>
+              </Link>
+              <ul aria-expanded="false">
+                <li>
+                  <Link className={`${path === "app-profile" ? "mm-active" : ""}`} to="/citas-mes">
+                    Citas
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`${path === "app-calender" ? "mm-active" : ""}`}
+                    to="/ganancias-mes"
+                  >
+                    Ganancias
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`${path === "doctors-details" ? "mm-active" : ""
+                      }`}
+                    to="/resultados-generales"
+                  >
+                    Pacientes
+                  </Link>
+                </li>
+
+              </ul>
+            </li>
+
+            
 
 
           </MM>

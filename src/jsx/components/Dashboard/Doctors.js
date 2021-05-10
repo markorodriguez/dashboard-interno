@@ -6,12 +6,13 @@ const Doctors = () => {
   const [lista, setLista] = useState("");
   const [isFetched, setFetched] = useState(false);
 
+  const d = new Date();
+  const dia = ("0" + d.getDate()).slice(-2);
+  const mes = ("0" + (d.getMonth() + 1)).slice(-2);
+  const año = d.getFullYear();
+
 
   useEffect(() => {
-    const d = new Date();
-    const dia = ("0" + d.getDate()).slice(-2);
-    const mes = ("0" + d.getMonth()).slice(-2);
-    const año = d.getFullYear();
 
     const fecha = {
       dia: dia,
@@ -38,9 +39,18 @@ const Doctors = () => {
           <div className="col-lg-12">
             <div className="card">
               <div className="card-header">
-                <h1 className="card-title" style={{ paddingBottom: "2rem" }}>
+                <div className="row" style={{width: '100%'}}>
+                  <div className="col-6">
+                  <h1 className="card-title" style={{ paddingBottom: "2rem" }}>
                   Citas para hoy
                 </h1>
+                  </div>
+                  <div className="col-6 text-center">
+                      <h3>{dia + '/' + mes + '/' + año}</h3>
+                  </div>
+                </div>
+
+                
               </div>
               <div className="card-body">
                 <div className="table-responsive">

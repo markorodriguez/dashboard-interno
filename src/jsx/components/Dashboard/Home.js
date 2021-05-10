@@ -3,16 +3,10 @@ import pMinDelay from "p-min-delay";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
-const RecoveredChart = loadable(() =>
-  pMinDelay(import("./charts/home/RecoveredChart"), 1000)
-);
-
-const VisitorChart = loadable(() =>
-  pMinDelay(import("./charts/home/VisitorChart"), 1000)
-);
 const ChartCircle = loadable(() =>
   pMinDelay(import("./charts/home/ChartCircle"), 1000)
 );
+
 
 const Home = () => {
   const [data, setData] = useState(""); //citas info total
@@ -20,8 +14,9 @@ const Home = () => {
   const [datos, setDatos] = useState("");
   const [negativos, setNegativos] = useState("")
   const [atendidos, setAtendidos] = useState("")
+  const [pacmes, setPacMes] = useState("")
   const d = new Date();
-  const mes = ("0" + d.getMonth()).slice(-2);
+  const mes = ("0" + (d.getMonth() + 1)).slice(-2);
 
   useEffect(() => {
 
@@ -29,7 +24,13 @@ const Home = () => {
       mes: mes,
     };
 
-    Axios.post("https://backend-clinica2331.herokuapp.com/totaldatos", datax)
+    Axios.post("http://localhost:2000/citasmes", datax).then((res)=>{
+      setPacMes(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+    Axios.post("http://localhost:2000/totaldatos")
       .then((res) => {
         setData(res.data);
       })
@@ -37,7 +38,7 @@ const Home = () => {
         console.log(err);
       });
 
-    Axios.post("https://backend-clinica2331.herokuapp.com/totalresultados")
+    Axios.post("http://localhost:2000/totalresultados")
       .then((res) => {
         setDatos(res.data);
       })
@@ -45,7 +46,7 @@ const Home = () => {
         console.log(err);
       });
 
-    Axios.post("https://backend-clinica2331.herokuapp.com/totalresultadosnegativos")
+    Axios.post("http://localhost:2000/totalresultadosnegativos")
       .then((res) => {
         setNegativos(res.data);
       })
@@ -53,7 +54,7 @@ const Home = () => {
         console.log(err);
       });
 
-    Axios.post("https://backend-clinica2331.herokuapp.com/totalatendidos")
+    Axios.post("http://localhost:2000/totalatendidos")
       .then((res) => {
         setAtendidos(res.data.length);
         setFetched(true);
@@ -94,8 +95,9 @@ const Home = () => {
                       </h3>
                       <div className="row mx-0 align-items-center">
                         <div className="col-sm-8 col-md-7  px-0">
-                          <div id="chartCircle">
-                            <ChartCircle newPositivos={datos.length} newNegativos={negativos.length} newTotal={data.length} />
+                          <div id="chartCircle" style={{width: '40%'}}>
+                            <ChartCircle newPositivos={datos.length} newNegativos={negativos.length} newTotal={data.length} />                    
+                            
                           </div>
                         </div>
                         <div className="col-sm-4 col-md-5 px-0">
@@ -134,7 +136,7 @@ const Home = () => {
                         <div className="media-body text-white text-right">
                           <p className="mb-1">Citas del mes</p>
                           {/* hacer peticion */}
-                          <h3 className="text-white">{data.length}</h3>
+                          <h3 className="text-white">{pacmes.length}</h3>
                         </div>
                       </div>
                     </div>
