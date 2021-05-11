@@ -1,28 +1,35 @@
 import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
 
-function BarChart() {
+function BarChart(props) {
    var data = {
       labels: [
-         "Jan",
+         "Ene",
          "Feb",
          "Mar",
-         "Apr",
+         "Abr",
          "May",
          "Jun",
+         "Jul",
+         "Ago",
+         "Sep",
+         "Oct",
+         "Nov",
+         "Dic",
       ],
       series: [
-         [5, 4, 3, 7, 5, 10],
-         [3, 2, 9, 5, 4, 6],
-         [4, 6, 3, 9, 6, 5],
+         [props.total.En, props.total.Fe, props.total.Mar, props.total.Ab, props.total.May, props.total.Jun,props.total.Jul, props.total.Ag, props.total.Sep, props.total.Oct, props.total.Nov, props.total.Dic], //total pacientes
+         [props.positivos.En, props.positivos.Fe, props.positivos.Mar, props.positivos.Ab, props.positivos.May, props.positivos.Jun,props.positivos.Jul, props.positivos.Ag, props.positivos.Sep, props.positivos.Oct, props.positivos.Nov, props.positivos.Dic], 
+         [props.negativos.En, props.negativos.Fe, props.negativos.Mar, props.negativos.Ab, props.negativos.May, props.negativos.Jun,props.negativos.Jul, props.negativos.Ag, props.negativos.Sep, props.negativos.Oct, props.negativos.Nov, props.negativos.Dic],
+         
       ],
    };
 
    var options = {
       fullWidth: true,
-      seriesBarDistance: 10,
+      seriesBarDistance: 20,
       chartPadding: {
-         right: 40,
+         right: 20,
       },
    };
 

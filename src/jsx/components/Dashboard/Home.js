@@ -24,13 +24,13 @@ const Home = () => {
       mes: mes,
     };
 
-    Axios.post("http://localhost:2000/citasmes", datax).then((res)=>{
+    Axios.post("https://backend-clinica2331.herokuapp.com/citasmes", datax).then((res)=>{
       setPacMes(res.data)
     }).catch((err)=>{
       console.log(err)
     })
 
-    Axios.post("http://localhost:2000/totaldatos")
+    Axios.post("https://backend-clinica2331.herokuapp.com/totaldatos")
       .then((res) => {
         setData(res.data);
       })
@@ -38,7 +38,7 @@ const Home = () => {
         console.log(err);
       });
 
-    Axios.post("http://localhost:2000/totalresultados")
+    Axios.post("https://backend-clinica2331.herokuapp.com/totalresultados")
       .then((res) => {
         setDatos(res.data);
       })
@@ -46,7 +46,7 @@ const Home = () => {
         console.log(err);
       });
 
-    Axios.post("http://localhost:2000/totalresultadosnegativos")
+    Axios.post("https://backend-clinica2331.herokuapp.com/totalresultadosnegativos")
       .then((res) => {
         setNegativos(res.data);
       })
@@ -54,7 +54,7 @@ const Home = () => {
         console.log(err);
       });
 
-    Axios.post("http://localhost:2000/totalatendidos")
+    Axios.post("https://backend-clinica2331.herokuapp.com/totalatendidos")
       .then((res) => {
         setAtendidos(res.data.length);
         setFetched(true);
@@ -152,7 +152,7 @@ const Home = () => {
                         <div className="media-body text-white text-right">
                           <p className="mb-1">Ganancias Pruebas COVID</p>
                           {/* hacer peticion */}
-                          <h3 className="text-white">S/ {atendidos * 40}</h3>
+                          <h3 className="text-white">S/ {atendidos * 100}</h3>
                         </div>
                       </div>
                     </div>

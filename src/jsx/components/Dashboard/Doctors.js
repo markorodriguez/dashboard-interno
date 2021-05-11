@@ -67,7 +67,7 @@ const Doctors = () => {
                           <strong>PACIENTE</strong>
                         </th>
                         <th>
-                          <strong>HORA</strong>
+                          <strong>EDAD</strong>
                         </th>
                         <th>
                           <strong>ESTADO</strong>
@@ -83,7 +83,7 @@ const Doctors = () => {
                         </td>
                         <td>{el.dni}</td>
                         <td>{el.apellidos + ''} <strong>{el.nombres}</strong> </td>
-                        <td>{el.hora}</td>
+                        <td>{el.edad}</td>
                         <td>
                           {         
                             el.atendido === 1 ? <span id={'spanTable'+index} className="badge light badge-success">

@@ -218,7 +218,7 @@ class SideBar extends Component {
                       }`}
                     to="/resultados-generales"
                   >
-                    Pacientes
+                    Resultados
                   </Link>
                 </li>
 

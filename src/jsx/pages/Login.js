@@ -7,19 +7,14 @@ export default function Login ({setToken})  {
    const [usuario, setUsuario] = useState("")
    const [contraseña, setContraseña] = useState("")
 
-
    const submitHandler = (e) => {
       e.preventDefault();
       const data = {
          usr: usuario,
          pwd: contraseña
       }
-
       Axios.post("https://backend-clinica2331.herokuapp.com/login", data).then((res)=>setToken(res.data)).catch((err)=>console.log(err)) 
-
-      
       //history.push("/");
-      
    };
 
    return (
