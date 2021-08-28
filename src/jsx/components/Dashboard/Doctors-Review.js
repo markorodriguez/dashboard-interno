@@ -121,7 +121,7 @@ function DoctorsReview() {
                                                     <i className="la la-user"></i>
                                                 </span>
                                                 <div className="media-body text-white text-right">
-                                                    <p className="mb-1">Pendientes</p>
+                                                    <p className="mb-1">No asistieron</p>
                                                     <h3 className="text-white">{data.length - atendidos.length}</h3>
                                                 </div>
                                             </div>

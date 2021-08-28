@@ -95,7 +95,7 @@ const Home = () => {
                       </h3>
                       <div className="row mx-0 align-items-center">
                         <div className="col-sm-8 col-md-7  px-0">
-                          <div id="chartCircle" style={{width: '40%'}}>
+                          <div id="chartCircle" style={{width: '100%'}}>
                             <ChartCircle newPositivos={datos.length} newNegativos={negativos.length} newTotal={data.length} />                    
                             
                           </div>

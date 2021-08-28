@@ -199,7 +199,7 @@ const Markup = () => {
 
   const {token, setToken} = useToken()
   if(!window.localStorage.getItem('token')){
-    console.log(token)
+    //console.log(token)
     return <Login setToken={setToken} />
   }
    
