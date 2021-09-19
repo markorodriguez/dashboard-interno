@@ -1,139 +1,154 @@
-import { Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-
-import avatar from "../../../images/avatar/1.jpg";
-import avatar1 from "../../../images/avatar/2.jpg";
-import avatar2 from "../../../images/avatar/3.jpg";
-import avatar3 from "../../../images/avatar/4.jpg";
-import avatar4 from "../../../images/avatar/5.jpg";
+import { Modal, Button} from "react-bootstrap";
+import Axios from "axios";
 
 import PerfectScrollbar from "react-perfect-scrollbar";
 
 const Timeline = () => {
-  const [data, setData] = useState([
-    {
-      name: "Dr. Samantha Queque",
-      rank: 1,
-      designation: "Gynecologist",
-      review: 451,
-      aStar: [1, 1, 1, 0, 0],
-      img: avatar,
-    },
-    {
-      name: "Dr. Abdul Aziz Lazis",
-      rank: 2,
-      designation: "Physical Therapy",
-      review: 238,
-      aStar: [1, 1, 1, 1, 0],
-      img: avatar1,
-    },
-    {
-      name: "Dr. Samuel Jr.",
-      rank: 3,
-      designation: "Dentist",
-      review: 300,
-      aStar: [1, 1, 1, 0, 0],
-      img: avatar2,
-    },
-    {
-      name: "Dr. Alex Siauw",
-      rank: 4,
-      designation: "Physical Therapy",
-      review: 451,
-      aStar: [1, 1, 1, 0, 0],
-      img: avatar3,
-    },
-    {
-      name: "Dr. Jennifer Ruby",
-      rank: 5,
-      designation: "Nursingc",
-      review: 700,
-      aStar: [1, 1, 1, 1, 1],
-      img: avatar4,
-    },
-  ]);
-  const [refresh, setRefresh] = useState(false);
+  const [dni, setDni] = useState("");
+  const [digito, setDigito] = useState("");
+  const [edad, setEdad] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [msj, setMessage] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [fetchCantidad, setFetchedCantidad] = useState(false);
 
-  const onClick = () => {
-    setRefresh(true);
-    setTimeout(() => {
-      setData([
-        ...data,
-        data[Math.floor(Math.random() * Math.floor(data.length - 1))],
-      ]);
-      setRefresh(false);
-    }, 1000);
-  };
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => {setShow(false)} 
+  const handleShow = () => {setShow(true)}
+
+  const enviarDatos = (e) => {
+    e.preventDefault()
+
+    const data = {
+      dni: dni,
+      digito: digito,
+      edad: edad,
+      fecha: fecha,
+      telefono: telefono
+  }
+  Axios.post('https://backend-clinica2331.herokuapp.com/registropacientes', data).then((r)=>{
+      //console.log(data)
+     setMessage(r.data)
+      console.log(r.data)
+      handleShow()
+
+  }).catch((err)=>{console.log(err)})
+  
+
+  }
+
+  const resetState = (e) => {
+    e.preventDefault()
+    setDni("")
+    setDigito("")
+    setEdad("")
+    setFecha("")
+    setTelefono("")
+  }
 
   return (
-    <div className="card">
-      <div className="card-header border-0 pb-0">
-        <h4 className="card-title">Top 5 Best Doctor</h4>
-        <Link className="btn-link ml-auto" to={"#"}>
-          More <span>&#187;</span>{" "}
-        </Link>
-      </div>
-      <div className="card-body">
-        <div className="widget-media best-doctor">
-          <PerfectScrollbar
-            id="bestDoctorsContent"
-            className=" dz-scroll height630 ps ps--active-y"
-          >
-            <ul className="timeline">
-              {data.map((d, i) => (
-                <li key={i}>
-                  <div className="timeline-panel">
-                    <div className="media mr-4">
-                      <img src={d.img} width={90} alt="" />
-                      <div className="number">#{d.rank}</div>
-                    </div>
-                    <div className="media-body">
-                      <h4 className="mb-2">{d.name}</h4>
-                      <p className="mb-2 text-primary">{d.designation}</p>
-                      <div className="star-review">
-                        {d.aStar.map((e, i) =>
-                          e > 0 ? (
-                            <Fragment key={i}>
-                              <i className="fa fa-star text-orange" />{" "}
-                            </Fragment>
-                          ) : (
-                            <Fragment key={i}>
-                              <i className="fa fa-star text-gray" />{" "}
-                            </Fragment>
-                          )
-                        )}
+    <React.Fragment>
 
-                        <span className="ml-3">{d.review} reviews</span>
-                      </div>
-                    </div>
-                    <div className="social-media">
-                      <Link
-                        to={"#"}
-                        className="btn btn-outline-primary btn-rounded mr-1 fa fa-instagram btn-sm"
-                      ></Link>
-                      <Link
-                        to={"#"}
-                        className="btn btn-outline-primary btn-rounded mr-1 fa fa-twitter btn-sm"
-                      ></Link>
-                      <Link
-                        to={"#"}
-                        className="btn btn-outline-primary btn-rounded mr-1 fa fa-facebook btn-sm"
-                      ></Link>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </PerfectScrollbar>
+<Modal show={show} onHide={handleClose}>
+  <Modal.Header closeButton>
+    <Modal.Title>!Atención!</Modal.Title>
+  </Modal.Header>
+
+  <Modal.Body>
+    <p>{msj}</p>
+  </Modal.Body>
+
+  <Modal.Footer>
+    <Button onClick={handleClose} variant="primary">Cerrar</Button>
+  </Modal.Footer>
+</Modal>
+
+      <div className="card mt-4">
+        <div className="card-header border-0 pb-0">
+          <h4>Registro de pacientes</h4>
+          <br />
+          
+        </div>
+        <div className="card-body">
+          <div className="widget-media best-doctor">
+            <form onSubmit={enviarDatos}>
+              <div className="row mt-4">
+                <div className="col-sm-4">
+                  <label>DNI del paciente:</label>
+                  <input
+                    value={dni}
+                    onChange={(e) => setDni(e.target.value)}
+                    className="form-control"
+                    placeholder="Ingresar el DNI"
+                    required
+                  />
+                </div>
+                <div className="col-sm-4">
+                  <label>Dígito de validación:</label>
+                  <input
+                    value={digito}
+                    onChange={(e) => setDigito(e.target.value)}
+                    className="form-control"
+                    maxLength="1"
+                    type="tel"
+                    placeholder="XXXXXXXX-Dígito"
+                    required
+                  />
+                </div>
+                <div className="col-sm-4">
+                  <label>Edad:</label>
+                  <input
+                  maxLength="2"
+                    value={edad}
+                    onChange={(e) => setEdad(e.target.value)}
+                    className="form-control"
+                    type="text"
+                    placeholder="Ingresar la edad"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="row mt-4">
+                <div className="col-sm-6">
+                  <label>Email:</label>
+                  <input
+                    value={telefono}
+                    onChange={(e) => setTelefono(e.target.value)}
+                    className="form-control"
+                    placeholder="Ingrese su email"
+                  />
+                </div>
+                <div className="col-sm-6">
+                  <label>Fecha</label>
+                  <input
+                    value={fecha}
+                    onChange={(e) => setFecha(e.target.value)}
+                    className="form-control"
+                    type="date"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="row mt-4 text-center">
+                <div className="col">
+                  <button  className="btn btn-success" type="submit"  > Guardar </button>
+                </div>
+                <div className="col">
+                  <button className="btn btn-danger" type="button" onClick={resetState}> Limpiar </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="card-footer border-0 pt-0 text-center">
+          <h5>Los registros cuentan para las citas del día</h5>
         </div>
       </div>
-      <div className="card-footer border-0 pt-0 text-center">
-        <Link to={"#"} className="btn-link" onClick={() => onClick()}>
-          See More <span>&#187;</span>{" "}
-          {refresh && <i className="fa fa-refresh"></i>}
-        </Link>
-      </div>
-    </div>
+    </React.Fragment>
   );
 };
 

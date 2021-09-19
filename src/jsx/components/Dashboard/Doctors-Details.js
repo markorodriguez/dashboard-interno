@@ -90,7 +90,7 @@ const DoctorsDetails = () => {
           </div>
         </div><div className="card-body">
           <div className="row">
-            <div className="col-4">
+            <div className="col-4 table-responsive" >
               <table className="table table-borderless ">
                 <tbody>{isFetched === true ? citas.map((el, index) => {
                   return (<tr className="di-td" onClick={() => { setCitaSel(el); setFetchedTwo(true) }} style={{ cursor: 'pointer' }} key={index}>
@@ -105,6 +105,7 @@ const DoctorsDetails = () => {
                 <thead className="thead-primary">
                   <tr>
                     <th>PACIENTE</th>
+                    <th>EMAIL</th>
                     <th>RESULTADO</th>
                     <th></th>
                   </tr>
@@ -112,6 +113,8 @@ const DoctorsDetails = () => {
                 <tbody>
                   <tr>
                     <td>{citaSel.apellidos + ' '} <strong>{citaSel.nombres}</strong></td>
+
+                    <td>{citaSel.telefono}</td>
                     <td>{citaSel.resultado === undefined ? 'Aún no registrado' : citaSel.resultado}</td>
                     <td><span onClick={() => { setModalCentered(true) }} className="btn btn-primary shadow btn-xs sharp mr-1">
                       <i className="fa fa-pencil"></i>

@@ -190,6 +190,15 @@ class SideBar extends Component {
                   </Link>
                 </li>
 
+                <li>
+                  <Link
+                    className={`${path === "timeline" ? "mm-active" : ""
+                      }`}
+                    to="/registro"
+                  >
+                    Registro
+                  </Link>
+                </li>
               </ul>
             </li>
 

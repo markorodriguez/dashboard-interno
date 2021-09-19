@@ -31,6 +31,7 @@ import Doctors from "./components/Dashboard/Doctors";
 import DoctorsDetails from "./components/Dashboard/Doctors-Details";
 import DoctorsReview from "./components/Dashboard/Doctors-Review";
 import PatientDetails from "./components/Dashboard/Patient-Details";
+import Timeline from "./components/Dashboard/Timeline"
 
 /// Bo
 import UiAlert from "./components/bootstrap/Alert";
@@ -221,6 +222,7 @@ const Markup = () => {
               <Route exact path = "/citas-mes" component={DoctorsReview}/> 
               <Route exact path = "/ganancias-mes" component={AppProfile}/> 
               <Route exact path ="/resultados-generales" component={PatientDetails} />
+              <Route exact path ="/registro" component={Timeline} />
             </Switch>
           </div>
         </div>
