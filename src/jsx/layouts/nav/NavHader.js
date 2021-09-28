@@ -5,6 +5,8 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import logoTextWhite from "../../../images/logo-text-white.png";
 import logoText from "../../../images/logo-text.png";
 import logoWhite from "../../../images/logo-white.png";
+import logoSA from "../../../logo/LOGOSANANDRES.png"
+import logoSA2 from "../../../logo/ihead.png"
 /// images
 import logo from "../../../images/logo.png";
 
@@ -18,15 +20,15 @@ const NavHader = () => {
       <Link to="/" className="brand-logo">
         {background.value === "dark" || navigationHader !== "color_1" ? (
           <Fragment>
-            <img className="logo-abbr" src={logoWhite} alt="" />
-            <img className="logo-compact" src={logoTextWhite} alt="" />
-            <img className="brand-title" src={logoTextWhite} alt="" />
+            <img className="logo-abbr" src={logoSA2} alt="" />
+            <img className="logo-compact" src={logoSA2} alt="" />
+            <img className="brand-title" src={logoSA} alt="" />
           </Fragment>
         ) : (
           <Fragment>
-            <img className="logo-abbr" src={logo} alt="" />
-            <img className="logo-compact" src={logoText} alt="" />
-            <img className="brand-title" src={logoText} alt="" />
+            <img className="logo-abbr" src={logoSA2} alt="" />
+            <img className="logo-compact" src={logoSA2} alt="" />
+            <img className="brand-title" src={logoSA} alt="" />
           </Fragment>
         )}
       </Link>
