@@ -157,6 +157,13 @@ class SideBar extends Component {
         "page-error-503",
       ];
 
+
+      const destroyCookie = () => {
+        localStorage.clear();
+        window.location.reload();
+      }
+
+
     return (
       <div className="deznav">
         <PerfectScrollbar className="deznav-scroll">
@@ -168,7 +175,7 @@ class SideBar extends Component {
               </Link>
               <ul aria-expanded="false">
                 <li>
-                  <Link className={`${path === "" ? "mm-active" : ""}`} to="/">
+                  <Link className={`${path === "" ? "mm-active" : ""}`} to="/home">
                     Dashboard
                   </Link>
                 </li>
@@ -234,6 +241,15 @@ class SideBar extends Component {
               </ul>
             </li>
 
+            <li className={`${app.includes(path) ? "mm-active" : ""}`}>
+              
+                <Link onClick={destroyCookie} to="/">
+                  <button className="mt-4 btn btn-danger nav-text" >  Cerrar Sesión</button>
+                </Link>
+                
+              
+              
+            </li>
             
 
 

@@ -202,7 +202,7 @@ const Markup = () => {
   if(!window.localStorage.getItem('token')){
     //console.log(token)
     return <Login setToken={setToken} />
-  }
+  } 
    
 
   return (
@@ -216,6 +216,7 @@ const Markup = () => {
         <div className={` ${!pagePath ? "content-body" : ""}`}>
           <div className={`${!pagePath ? "container-fluid" : ""}`}  style={{ "minHeight": "720px", "margin-bottom":"80px" }}>
             <Switch>
+
               <Route exact path="/" component={Home}/>
               <Route exact path = "/citas" component={Doctors}/> 
               <Route exact path ="/resultados" component={DoctorsDetails} />
